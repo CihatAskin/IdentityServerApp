@@ -1,13 +1,8 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace IdentityServerApp.Client1
 {
@@ -23,6 +18,26 @@ namespace IdentityServerApp.Client1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(opts =>
+            {
+                opts.DefaultScheme = "Cookies";
+                opts.DefaultChallengeScheme = "oidc";
+
+            }).AddCookie("Cookies").AddOpenIdConnect("oidc", opts =>
+            {
+
+                opts.SignInScheme = "Cookies";
+                opts.Authority = "https://localhost:5001";
+                opts.ClientId = "Client1-Mvc";
+                opts.ClientSecret = "secret";
+                opts.ResponseType = "code id_token";
+                opts.GetClaimsFromUserInfoEndpoint = true;
+                opts.SaveTokens = true;
+                opts.Scope.Add("api_1_read");
+                opts.Scope.Add("offline_access");
+
+            });
+
             services.AddControllersWithViews();
         }
 
@@ -43,7 +58,7 @@ namespace IdentityServerApp.Client1
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

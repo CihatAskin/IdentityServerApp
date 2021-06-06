@@ -1,11 +1,19 @@
 {
   "version": 2,
-  "dgSpecHash": "GwLuuJY7NuomGuDyXgQ5/IfosWApb9zkOvsXK7L7rDjIRyk2yV1MsKFa0k6OnOVewNKIIqnq/bucZrw01btmdg==",
+  "dgSpecHash": "TfGrx7l/bnGH00J40j2FG0yD5WuXoyGbIgLHMXNdgzXWK5/O0TRq92GuuAyUvm+2yrm4bUTGjKgzjWQkKHPb/A==",
   "success": true,
   "projectFilePath": "C:\\Users\\Cihat\\Documents\\WorkCihat\\IdentityServerApp\\IdentityServerApp.Client1\\IdentityServerApp.Client1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Cihat\\.nuget\\packages\\identitymodel\\5.1.0\\identitymodel.5.1.0.nupkg.sha512",
+    "C:\\Users\\Cihat\\.nuget\\packages\\microsoft.aspnetcore.authentication.openidconnect\\3.1.15\\microsoft.aspnetcore.authentication.openidconnect.3.1.15.nupkg.sha512",
+    "C:\\Users\\Cihat\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\5.5.0\\microsoft.identitymodel.jsonwebtokens.5.5.0.nupkg.sha512",
+    "C:\\Users\\Cihat\\.nuget\\packages\\microsoft.identitymodel.logging\\5.5.0\\microsoft.identitymodel.logging.5.5.0.nupkg.sha512",
+    "C:\\Users\\Cihat\\.nuget\\packages\\microsoft.identitymodel.protocols\\5.5.0\\microsoft.identitymodel.protocols.5.5.0.nupkg.sha512",
+    "C:\\Users\\Cihat\\.nuget\\packages\\microsoft.identitymodel.protocols.openidconnect\\5.5.0\\microsoft.identitymodel.protocols.openidconnect.5.5.0.nupkg.sha512",
+    "C:\\Users\\Cihat\\.nuget\\packages\\microsoft.identitymodel.tokens\\5.5.0\\microsoft.identitymodel.tokens.5.5.0.nupkg.sha512",
     "C:\\Users\\Cihat\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\Cihat\\.nuget\\packages\\system.identitymodel.tokens.jwt\\5.5.0\\system.identitymodel.tokens.jwt.5.5.0.nupkg.sha512",
+    "C:\\Users\\Cihat\\.nuget\\packages\\system.security.cryptography.cng\\4.5.0\\system.security.cryptography.cng.4.5.0.nupkg.sha512",
     "C:\\Users\\Cihat\\.nuget\\packages\\system.text.encodings.web\\5.0.1\\system.text.encodings.web.5.0.1.nupkg.sha512",
     "C:\\Users\\Cihat\\.nuget\\packages\\system.text.json\\5.0.1\\system.text.json.5.0.1.nupkg.sha512"
   ],

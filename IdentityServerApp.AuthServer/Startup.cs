@@ -22,6 +22,8 @@ namespace IdentityServerApp.AuthServer
                     .AddInMemoryApiResources(Config.GetApiResources())
                     .AddInMemoryApiScopes(Config.GetApiScopes())
                     .AddInMemoryClients(Config.GetClients())
+                    .AddInMemoryIdentityResources(Config.GetIdentityResources())
+                    .AddTestUsers(Config.GetUsers())
                     .AddDeveloperSigningCredential(); //use for development phase
             services.AddControllersWithViews();
         }

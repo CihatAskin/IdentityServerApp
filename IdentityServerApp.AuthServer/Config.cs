@@ -1,7 +1,10 @@
-﻿using IdentityServer4.Models;
+﻿using IdentityServer4;
+using IdentityServer4.Models;
+using IdentityServer4.Test;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace IdentityServerApp.AuthServer
@@ -34,6 +37,39 @@ namespace IdentityServerApp.AuthServer
                 new ApiScope("api_2_update","Update Auth For API2")
             };
         }
+
+        public static IEnumerable<IdentityResource> GetIdentityResources()
+        {
+
+            return new List<IdentityResource>() {
+
+                new IdentityResources.OpenId(),//subId
+                new IdentityResources.Profile()
+            };
+        }
+        public static List<TestUser> GetUsers()
+        {
+
+            return new List<TestUser>() {
+
+                new TestUser
+                {
+                    SubjectId="1",Username="Adem",Password="male123",
+                    Claims= new List<Claim>(){
+                                new Claim("given_name","Ersin"),
+                                new Claim("family_name","Mufit")
+                    }
+                },  new TestUser
+                {
+                    SubjectId="2",Username="Havva",Password="female123",
+                    Claims= new List<Claim>(){
+                                new Claim("given_name","pempe"),
+                                new Claim("family_name","Mufit")
+                    }
+                },
+            };
+
+        }
         public static IEnumerable<Client> GetClients()
         {
             return new List<Client>() {
@@ -52,9 +88,29 @@ namespace IdentityServerApp.AuthServer
                     ClientSecrets=new[] {new Secret("secret".Sha256()) },
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
                     AllowedScopes= { "api_1_read"}
+                },
+                 new Client()
+                {
+                    ClientId="Client1-Mvc",
+                    ClientName="Client1 APP",
+                    RequirePkce=false,
+                    ClientSecrets=new[] {new Secret("secret".Sha256()) },
+                    AllowedGrantTypes = GrantTypes.Hybrid,
+                    RedirectUris= new List<string>(){ "https://localhost:5003/signin-oidc"},
+                    PostLogoutRedirectUris= { "https://localhost:5003/signout-callback-oidc" },
+                    AllowedScopes= {IdentityServerConstants.StandardScopes.OpenId,
+                                    IdentityServerConstants.StandardScopes.Profile,
+                                    "api_1_read",
+                                    IdentityServerConstants.StandardScopes.OfflineAccess},
+                    AccessTokenLifetime=2*60*60,
+                    AllowOfflineAccess=true,//for refresh token
+                    RefreshTokenUsage=TokenUsage.ReUse,
+                    RefreshTokenExpiration=TokenExpiration.Absolute,
+                    AbsoluteRefreshTokenLifetime=60*24*60*60
                 }
             };
 
         }
+
     }
 }
