@@ -71,13 +71,23 @@ namespace IdentityServerApp.Client1.Controllers
             };
 
             var authenticationResult = await HttpContext.AuthenticateAsync();
-            
+
             var properties = authenticationResult.Properties;
             properties.StoreTokens(tokens);
 
-            await HttpContext.SignInAsync("Cookies",authenticationResult.Principal,properties);
+            await HttpContext.SignInAsync("Cookies", authenticationResult.Principal, properties);
 
             return RedirectToAction("index");
         }
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult AdminAction()
+        {
+
+            return View();
+        }
+
+        [Authorize(Roles = "Customer,Admin")]
+        public IActionResult CustomerAction() => View();
     }
 }

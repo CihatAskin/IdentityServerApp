@@ -1,3 +1,5 @@
+using IdentityServerApp.Client1.Services;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -18,14 +20,19 @@ namespace IdentityServerApp.Client1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpContextAccessor();
+            services.AddScoped<IApiResourceHttpClient, ApiResourceHttpClient>();
+
             services.AddAuthentication(opts =>
             {
                 opts.DefaultScheme = "Cookies";
                 opts.DefaultChallengeScheme = "oidc";
 
-            }).AddCookie("Cookies").AddOpenIdConnect("oidc", opts =>
+            }).AddCookie("Cookies",opts=> {
+                opts.AccessDeniedPath = "/Home/AccessDenied";
+            
+            }).AddOpenIdConnect("oidc", opts =>
             {
-
                 opts.SignInScheme = "Cookies";
                 opts.Authority = "https://localhost:5001";
                 opts.ClientId = "Client1-Mvc";
@@ -34,8 +41,20 @@ namespace IdentityServerApp.Client1
                 opts.GetClaimsFromUserInfoEndpoint = true;
                 opts.SaveTokens = true;
                 opts.Scope.Add("api_1_read");
+                opts.Scope.Add("CountryAndCity");
+                opts.Scope.Add("Roles");
+                opts.Scope.Add("email");
                 opts.Scope.Add("offline_access");
+                opts.ClaimActions.MapUniqueJsonKey("country", "country");
+                opts.ClaimActions.MapUniqueJsonKey("city", "city");
+                opts.ClaimActions.MapUniqueJsonKey("role_0", "role");
 
+                opts.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                {
+                    RoleClaimType = "role_0",
+                    NameClaimType = "name_0"
+
+                };
             });
 
             services.AddControllersWithViews();

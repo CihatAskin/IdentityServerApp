@@ -3,6 +3,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using IdentityServerApp.AuthServer.Models;
+using Microsoft.EntityFrameworkCore;
+using IdentityServerApp.AuthServer.Repository;
+using IdentityServerApp.AuthServer.Services;
 
 namespace IdentityServerApp.AuthServer
 {
@@ -18,13 +22,19 @@ namespace IdentityServerApp.AuthServer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<ICustomUserRepository, CustomUserRepository>();
+            services.AddDbContext<CustomDbContext>(opts=> {
+                opts.UseSqlServer(Configuration.GetConnectionString("LocalDb"));            
+            });
+
             services.AddIdentityServer()
                     .AddInMemoryApiResources(Config.GetApiResources())
                     .AddInMemoryApiScopes(Config.GetApiScopes())
                     .AddInMemoryClients(Config.GetClients())
                     .AddInMemoryIdentityResources(Config.GetIdentityResources())
-                    .AddTestUsers(Config.GetUsers())
-                    .AddDeveloperSigningCredential(); //use for development phase
+                    // .AddTestUsers(Config.GetUsers())
+                    .AddDeveloperSigningCredential() //use for development phase
+                    .AddProfileService<CustomProfileService>();
             services.AddControllersWithViews();
         }
 

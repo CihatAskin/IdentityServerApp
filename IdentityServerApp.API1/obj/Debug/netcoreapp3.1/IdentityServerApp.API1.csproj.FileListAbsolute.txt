@@ -14,7 +14,6 @@ C:\Users\Cihat\Documents\WorkCihat\IdentityServerApp\IdentityServerApp.API1\bin\
 C:\Users\Cihat\Documents\WorkCihat\IdentityServerApp\IdentityServerApp.API1\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
 C:\Users\Cihat\Documents\WorkCihat\IdentityServerApp\IdentityServerApp.API1\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 C:\Users\Cihat\Documents\WorkCihat\IdentityServerApp\IdentityServerApp.API1\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
-C:\Users\Cihat\Documents\WorkCihat\IdentityServerApp\IdentityServerApp.API1\obj\Debug\netcoreapp3.1\IdentityServerApp.API1.csprojAssemblyReference.cache
 C:\Users\Cihat\Documents\WorkCihat\IdentityServerApp\IdentityServerApp.API1\obj\Debug\netcoreapp3.1\IdentityServerApp.API1.AssemblyInfoInputs.cache
 C:\Users\Cihat\Documents\WorkCihat\IdentityServerApp\IdentityServerApp.API1\obj\Debug\netcoreapp3.1\IdentityServerApp.API1.AssemblyInfo.cs
 C:\Users\Cihat\Documents\WorkCihat\IdentityServerApp\IdentityServerApp.API1\obj\Debug\netcoreapp3.1\IdentityServerApp.API1.csproj.CoreCompileInputs.cache
@@ -27,3 +26,4 @@ C:\Users\Cihat\Documents\WorkCihat\IdentityServerApp\IdentityServerApp.API1\obj\
 C:\Users\Cihat\Documents\WorkCihat\IdentityServerApp\IdentityServerApp.API1\obj\Debug\netcoreapp3.1\IdentityServerApp.API1.dll
 C:\Users\Cihat\Documents\WorkCihat\IdentityServerApp\IdentityServerApp.API1\obj\Debug\netcoreapp3.1\IdentityServerApp.API1.pdb
 C:\Users\Cihat\Documents\WorkCihat\IdentityServerApp\IdentityServerApp.API1\obj\Debug\netcoreapp3.1\IdentityServerApp.API1.genruntimeconfig.cache
+C:\Users\Cihat\Documents\WorkCihat\IdentityServerApp\IdentityServerApp.API1\obj\Debug\netcoreapp3.1\IdentityServerApp.API1.csprojAssemblyReference.cache

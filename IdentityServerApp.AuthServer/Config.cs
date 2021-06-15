@@ -44,7 +44,12 @@ namespace IdentityServerApp.AuthServer
             return new List<IdentityResource>() {
 
                 new IdentityResources.OpenId(),//subId
-                new IdentityResources.Profile()
+                new IdentityResources.Profile(),
+                new IdentityResources.Email(),
+                new IdentityResource(){ Name="CountryAndCity",DisplayName="Country And City",Description="User's Country and City",
+                UserClaims= new []{ "country","city"} },
+                new IdentityResource(){ Name="Roles",DisplayName="Roles",Description="User's Roles",UserClaims= new[]{"role" } }
+
             };
         }
         public static List<TestUser> GetUsers()
@@ -57,14 +62,20 @@ namespace IdentityServerApp.AuthServer
                     SubjectId="1",Username="Adem",Password="male123",
                     Claims= new List<Claim>(){
                                 new Claim("given_name","Ersin"),
-                                new Claim("family_name","Mufit")
+                                new Claim("family_name","Mufit"),
+                                new Claim("country","Türkiye"),
+                                new Claim("city","İzmir"),
+                                new Claim("role","Admin")
                     }
                 },  new TestUser
                 {
                     SubjectId="2",Username="Havva",Password="female123",
                     Claims= new List<Claim>(){
                                 new Claim("given_name","pempe"),
-                                new Claim("family_name","Mufit")
+                                new Claim("family_name","Mufit"),
+                                new Claim("country","Türkiye"),
+                                new Claim("city","Antalya"),
+                                new Claim("role","Customer")
                     }
                 },
             };
@@ -100,13 +111,39 @@ namespace IdentityServerApp.AuthServer
                     PostLogoutRedirectUris= { "https://localhost:5003/signout-callback-oidc" },
                     AllowedScopes= {IdentityServerConstants.StandardScopes.OpenId,
                                     IdentityServerConstants.StandardScopes.Profile,
+                                    IdentityServerConstants.StandardScopes.Email,
                                     "api_1_read",
-                                    IdentityServerConstants.StandardScopes.OfflineAccess},
+                                    IdentityServerConstants.StandardScopes.OfflineAccess,
+                                    "CountryAndCity",
+                                    "Roles"},
                     AccessTokenLifetime=2*60*60,
                     AllowOfflineAccess=true,//for refresh token
                     RefreshTokenUsage=TokenUsage.ReUse,
                     RefreshTokenExpiration=TokenExpiration.Absolute,
-                    AbsoluteRefreshTokenLifetime=60*24*60*60
+                    AbsoluteRefreshTokenLifetime=60*24*60*60,
+                    RequireConsent=true
+                },            
+                 new Client()
+                {
+                    ClientId="Client2-Mvc",
+                    ClientName="Client2 APP",
+                    RequirePkce=false,
+                    ClientSecrets=new[] {new Secret("secret".Sha256()) },
+                    AllowedGrantTypes = GrantTypes.Hybrid,//for code id_token 
+                    RedirectUris= new List<string>(){ "https://localhost:5005/signin-oidc"},
+                    PostLogoutRedirectUris= { "https://localhost:5005/signout-callback-oidc" },
+                    AllowedScopes= {IdentityServerConstants.StandardScopes.OpenId,
+                                    IdentityServerConstants.StandardScopes.Profile,
+                                    "api_2_read",
+                                    IdentityServerConstants.StandardScopes.OfflineAccess,
+                                    "CountryAndCity",
+                                    "Roles"},
+                    AccessTokenLifetime=2*60*60,
+                    AllowOfflineAccess=true,//for refresh token
+                    RefreshTokenUsage=TokenUsage.ReUse,
+                    RefreshTokenExpiration=TokenExpiration.Absolute,
+                    AbsoluteRefreshTokenLifetime=60*24*60*60,
+                    RequireConsent=true
                 }
             };
 
