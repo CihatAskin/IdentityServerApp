@@ -122,7 +122,7 @@ namespace IdentityServerApp.AuthServer
                     RefreshTokenExpiration=TokenExpiration.Absolute,
                     AbsoluteRefreshTokenLifetime=60*24*60*60,
                     RequireConsent=true
-                },            
+                },
                  new Client()
                 {
                     ClientId="Client2-Mvc",
@@ -144,7 +144,25 @@ namespace IdentityServerApp.AuthServer
                     RefreshTokenExpiration=TokenExpiration.Absolute,
                     AbsoluteRefreshTokenLifetime=60*24*60*60,
                     RequireConsent=true
-                }
+                },
+
+                 new Client(){
+                    ClientId="js-client",
+                    ClientName="Js Client (Angular)",
+                    RequireClientSecret=false,
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RedirectUris= { "http://localhost:4200/callback"},
+                    AllowedCorsOrigins={ "http://localhost:4200"},
+                    PostLogoutRedirectUris={ "http://localhost:4200"},
+                    AllowedScopes= {IdentityServerConstants.StandardScopes.OpenId,
+                                    IdentityServerConstants.StandardScopes.Profile,
+                                    IdentityServerConstants.StandardScopes.Email,
+                                    "api_1_read",
+                                    IdentityServerConstants.StandardScopes.OfflineAccess,
+                                    "CountryAndCity",
+                                    "Roles"},
+                 }
+
             };
 
         }
