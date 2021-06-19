@@ -28,10 +28,12 @@ namespace IdentityServerApp.Client1.Controllers
             return View();
         }
 
-        public async Task Logout()
+        public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync("Cookies");
-            await HttpContext.SignOutAsync("oidc");
+
+            return RedirectToAction("Index", "Home");
+            //await HttpContext.SignOutAsync("oidc"); auth server dan da çıkış yapması için
         }
 
         public async Task<IActionResult> GetRefreshToken()

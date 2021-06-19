@@ -161,7 +161,26 @@ namespace IdentityServerApp.AuthServer
                                     IdentityServerConstants.StandardScopes.OfflineAccess,
                                     "CountryAndCity",
                                     "Roles"},
-                 }
+                 },
+                 new Client()
+                {
+                    ClientId="Client1-ResourceOwner-Mvc",
+                    ClientName="Client1 APP MVC",
+                    ClientSecrets=new[] {new Secret("secret".Sha256()) },
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                    AllowedScopes= {IdentityServerConstants.StandardScopes.OpenId,
+                                    IdentityServerConstants.StandardScopes.Profile,
+                                    IdentityServerConstants.StandardScopes.Email,
+                                    "api_1_read",
+                                    IdentityServerConstants.StandardScopes.OfflineAccess,
+                                    "CountryAndCity",
+                                    "Roles"},
+                    AccessTokenLifetime=2*60*60,
+                    AllowOfflineAccess=true,//for refresh token
+                    RefreshTokenUsage=TokenUsage.ReUse,
+                    RefreshTokenExpiration=TokenExpiration.Absolute,
+                    AbsoluteRefreshTokenLifetime=60*24*60*60,
+                }
 
             };
 

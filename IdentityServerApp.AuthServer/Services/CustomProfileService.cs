@@ -34,11 +34,11 @@ namespace IdentityServerApp.AuthServer.Services
 
             if (user.Id == 1)
             {
-                claims.Add(new Claim("role", "admin"));
+                claims.Add(new Claim("role", "Admin"));
             }
             else
             {
-                claims.Add(new Claim("role", "customer"));
+                claims.Add(new Claim("role", "Customer"));
             }
 
             context.AddRequestedClaims(claims);
