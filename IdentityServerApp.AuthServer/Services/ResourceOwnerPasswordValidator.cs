@@ -24,8 +24,7 @@ namespace IdentityServerApp.AuthServer.Services
             {
                 var user = await _customUserRepository.FindByEmail(context.UserName);
 
-                context.Result = new GrantValidationResult(user.Id.ToString(),OidcConstants.AuthenticationMethods.Password);
-
+                context.Result = new GrantValidationResult(user.Id.ToString(), OidcConstants.AuthenticationMethods.Password);
             }
         }
     }

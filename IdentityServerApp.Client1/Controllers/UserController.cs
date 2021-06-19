@@ -49,8 +49,8 @@ namespace IdentityServerApp.Client1.Controllers
             var refreshToken = await HttpContext.GetTokenAsync(OpenIdConnectParameterNames.RefreshToken);
 
             var refreshTokenRequest = new RefreshTokenRequest();
-            refreshTokenRequest.ClientId = _configuration["Client1Mvc:ClientId"];
-            refreshTokenRequest.ClientSecret = _configuration["Client1Mvc:ClientSecret"];
+            refreshTokenRequest.ClientId = _configuration["ClientResourceOwner:ClientId"];
+            refreshTokenRequest.ClientSecret = _configuration["ClientResourceOwner:ClientSecret"];
             refreshTokenRequest.RefreshToken = refreshToken;
             refreshTokenRequest.Address = disco.TokenEndpoint;
             //username ve password u cookie den alır.

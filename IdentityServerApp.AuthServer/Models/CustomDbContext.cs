@@ -4,7 +4,7 @@ namespace IdentityServerApp.AuthServer.Models
 {
     public class CustomDbContext : DbContext
     {
-        public CustomDbContext(DbContextOptions opts) : base(opts)
+        public CustomDbContext(DbContextOptions<CustomDbContext> opts) : base(opts)
         {
 
         }

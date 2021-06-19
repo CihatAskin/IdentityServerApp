@@ -7,6 +7,7 @@ using IdentityServerApp.AuthServer.Models;
 using Microsoft.EntityFrameworkCore;
 using IdentityServerApp.AuthServer.Repository;
 using IdentityServerApp.AuthServer.Services;
+using System.Reflection;
 
 namespace IdentityServerApp.AuthServer
 {
@@ -23,15 +24,30 @@ namespace IdentityServerApp.AuthServer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<ICustomUserRepository, CustomUserRepository>();
-            services.AddDbContext<CustomDbContext>(opts=> {
-                opts.UseSqlServer(Configuration.GetConnectionString("LocalDb"));            
+            services.AddDbContext<CustomDbContext>(opts =>
+            {
+                opts.UseSqlServer(Configuration.GetConnectionString("LocalDb"));
             });
 
+            var assemblyName = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
+
             services.AddIdentityServer()
-                    .AddInMemoryApiResources(Config.GetApiResources())
-                    .AddInMemoryApiScopes(Config.GetApiScopes())
-                    .AddInMemoryClients(Config.GetClients())
-                    .AddInMemoryIdentityResources(Config.GetIdentityResources())
+                    .AddConfigurationStore(opts=>
+                    {
+                        opts.ConfigureDbContext = c => c.UseSqlServer(Configuration.GetConnectionString("LocalDb"),
+                             sqlopts => sqlopts.MigrationsAssembly(assemblyName)
+                                                                     );
+                    })
+                    .AddOperationalStore(opts =>
+                    {
+                        opts.ConfigureDbContext = c => c.UseSqlServer(Configuration.GetConnectionString("LocalDb"),
+                             sqlopts => sqlopts.MigrationsAssembly(assemblyName)
+                                                                     );
+                    })
+                    //.AddInMemoryApiResources(Config.GetApiResources())
+                    //.AddInMemoryApiScopes(Config.GetApiScopes())
+                    //.AddInMemoryClients(Config.GetClients())
+                    //.AddInMemoryIdentityResources(Config.GetIdentityResources())
                     // .AddTestUsers(Config.GetUsers())
                     .AddDeveloperSigningCredential() //use for development phase
                     .AddProfileService<CustomProfileService>()
