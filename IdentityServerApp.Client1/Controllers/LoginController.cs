@@ -1,5 +1,6 @@
 ﻿using IdentityModel.Client;
 using IdentityServerApp.Client1.Models;
+using IdentityServerApp.Client1.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
@@ -18,10 +19,13 @@ namespace IdentityServerApp.Client1.Controllers
     public class LoginController : Controller
     {
         private readonly IConfiguration _configuration;
+        private readonly IApiResourceHttpClient _apiResourceHttpClient;
 
-        public LoginController(IConfiguration configuration)
+        public LoginController(IConfiguration configuration,
+                               IApiResourceHttpClient apiResourceHttpClient)
         {
             _configuration = configuration;
+            _apiResourceHttpClient = apiResourceHttpClient;
         }
 
         public IActionResult Index()
@@ -52,7 +56,7 @@ namespace IdentityServerApp.Client1.Controllers
 
             if (token.IsError)
             {
-                ModelState.AddModelError("","Email veya şifreniz yanlış");
+                ModelState.AddModelError("", "Email veya şifreniz yanlış");
                 return View();
                 //error log
             }
@@ -91,6 +95,31 @@ namespace IdentityServerApp.Client1.Controllers
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal, properties);
 
             return RedirectToAction("Index", "User");
+        }
+
+        public IActionResult SignUp()
+        {
+
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> SignUp(UserSaveViewModel userSaveViewModel)
+        {
+            if (!ModelState.IsValid) return View();
+
+            var result = await _apiResourceHttpClient.SaveUserViewModel(userSaveViewModel);
+
+            if (result != null)
+            {
+                result.ForEach(err =>
+                {
+                    ModelState.AddModelError("", err);
+
+                });
+                return View();
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

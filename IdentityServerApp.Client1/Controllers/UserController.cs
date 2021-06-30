@@ -1,15 +1,16 @@
 ﻿using IdentityModel.Client;
+using IdentityServerApp.Client1.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using System;
+using System.Net.Http;
+using System.Globalization;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace IdentityServerApp.Client1.Controllers
 {

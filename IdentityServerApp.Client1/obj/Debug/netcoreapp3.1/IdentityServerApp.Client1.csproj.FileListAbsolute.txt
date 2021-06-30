@@ -124,3 +124,4 @@ C:\Users\Cihat\Documents\WorkCihat\IdentityServerApp\IdentityServerApp.Client1\o
 C:\Users\Cihat\Documents\WorkCihat\IdentityServerApp\IdentityServerApp.Client1\obj\Debug\netcoreapp3.1\IdentityServerApp.Client1.dll
 C:\Users\Cihat\Documents\WorkCihat\IdentityServerApp\IdentityServerApp.Client1\obj\Debug\netcoreapp3.1\IdentityServerApp.Client1.pdb
 C:\Users\Cihat\Documents\WorkCihat\IdentityServerApp\IdentityServerApp.Client1\obj\Debug\netcoreapp3.1\IdentityServerApp.Client1.genruntimeconfig.cache
+C:\Users\Cihat\Documents\WorkCihat\IdentityServerApp\IdentityServerApp.Client1\obj\Debug\netcoreapp3.1\Razor\Views\Login\SignUp.cshtml.g.cs
